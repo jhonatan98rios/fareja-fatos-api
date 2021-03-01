@@ -2,7 +2,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 
+const helmet = require('helmet');
+
 app.use(bodyParser.json());
+app.use(helmet());
+app.disable('x-powered-by')
+
 
 const hotNews = require('./services/newsService')
 const classifierController = require('./services/classifierService')
@@ -20,8 +25,8 @@ app.get('/hot-news', (req, res) => {
 })
 
 app.post('/classifier', async (req, res) => {
-  const result = await classifierController(req.body.text)
-  const keywords = stringParserService(req.body.text)
+  const result = await classifierController(req.body.sample)
+  const keywords = stringParserService(req.body.sample)
   const news = await recommenderService(keywords)
 
   res.json({
@@ -30,4 +35,8 @@ app.post('/classifier', async (req, res) => {
   })
 })
 
-app.listen(process.env.PORT || 3000)
+app.post('/save_news', async (req, res) => {
+  res.status(200).send("Salvo com sucesso!")
+})
+
+app.listen(process.env.PORT || 5000)

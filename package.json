@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "google-news-json": "^2.0.4",
+    "helmet": "^4.4.1",
     "keyword-extractor": "^0.0.19",
     "natural": "^4.0.0"
   }
