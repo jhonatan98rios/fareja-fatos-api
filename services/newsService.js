@@ -1,4 +1,4 @@
-const fakeApi = require('../database/fakeApi')
+const fakeApi = require('../database/fake-api')
 
 function hotNews(){
   const selectedNews = []

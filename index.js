@@ -2,17 +2,17 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 
-/* const helmet = require('helmet');
-const cors = require('cors'); */
+const helmet = require('helmet');
+const cors = require('cors');
 
 app.use(bodyParser.json());
-/* app.use(helmet());
+app.use(helmet());
 app.use(cors());
-app.disable('x-powered-by') */
+app.disable('x-powered-by')
 
 
 const hotNews = require('./services/newsService')
-const classifierController = require('./services/classifierService')
+const classifierService = require('./services/classifierService')
 const stringParserService = require('./services/stringParserService')
 const recommenderService = require('./services/recommenderService')
 
@@ -27,9 +27,11 @@ app.get('/hot-news', (req, res) => {
 })
 
 app.post('/classifier', async (req, res) => {
-  const result = await classifierController(req.body.sample)
+  const result = await classifierService(req.body.sample)
   const keywords = stringParserService(req.body.sample)
   const news = await recommenderService(keywords)
+
+  console.log(result)
 
   res.json({
     result,
