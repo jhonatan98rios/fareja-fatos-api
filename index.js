@@ -31,8 +31,6 @@ app.post('/classifier', async (req, res) => {
   const keywords = stringParserService(req.body.sample)
   const news = await recommenderService(keywords)
 
-  console.log(result)
-
   res.json({
     result,
     news

@@ -1,6 +1,6 @@
 const { BayesClassifier } = require('natural')
-const classifier = new BayesClassifier()
-const train = require('../database/train-list')
+/* const classifier = new BayesClassifier()
+const train = require('../database/train-list') */
 const { promisify } = require('util');
 
 async function classifierService(text) {
