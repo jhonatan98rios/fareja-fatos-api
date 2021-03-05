@@ -20,13 +20,14 @@ async function saveNews(sample, label) {
 
   const db = await connect()
   const result = await db.query(
-    "INSERT INTO news (sample, label, checked) VALUES ($1, $2, $3)",
-    [sample, label, false]
+    "INSERT INTO news (sample, label) VALUES ($1, $2)",
+    [sample, label]
   ).catch(err => {
+
     console.log(err)
   })
 
-  return result.rowCount
+  return result
 }
 
 async function getNews(){
@@ -35,6 +36,7 @@ async function getNews(){
   const result = await db.query(
     "SELECT * FROM news"
   ).catch( err => {
+
     console.log(err)
   })
 
