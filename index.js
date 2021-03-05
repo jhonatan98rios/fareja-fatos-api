@@ -15,6 +15,8 @@ const hotNews = require('./services/newsService')
 const classifierService = require('./services/classifierService')
 const stringParserService = require('./services/stringParserService')
 const recommenderService = require('./services/recommenderService')
+const  { saveNews, getNews} = require('./controller/saveNews');
+
 
 
 app.get('/', (req, res) => {
@@ -38,7 +40,13 @@ app.post('/classifier', async (req, res) => {
 })
 
 app.post('/save_news', async (req, res) => {
-  res.status(200).send("Salvo com sucesso!")
+  const result = await saveNews(req.body.sample)
+  res.status(200).send(result)
+})
+
+app.get('/get_new', async (req, res) => {
+  const result = await getNews()
+  res.status(200).send(result)
 })
 
 app.listen(process.env.PORT || 5000)
